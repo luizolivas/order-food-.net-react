@@ -1,0 +1,52 @@
+# Node.js (Frontend)
+node_modules/
+dist/
+build/
+out/
+.next/
+public/
+.angular/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+*.tgz
+
+# .NET (Backend)
+bin/
+obj/
+.vs/
+appsettings.json  
+
+# Ignorar migrations e context
+order-food-backend/order-food-backend/Context/
+order-food-backend/order-food-backend/Migrations/
+
+# Docker
+.dockerignore
+.docker/
+docker-compose.override.yml
+docker-compose.*.yml
+
+# Kubernetes
+.kube/
+minikube/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+debug/
+logs/
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.swp
+
+# MacOS e Linux
+.DS_Store
+*~
+
+
+# PostgreeSQL
+db/data/
+/order-food-backend/order-food-backend/appsettings.Development.json
