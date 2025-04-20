@@ -1,9 +1,10 @@
 ﻿using order_food_backend.Repositories.Interfaces;
+using order_food_backend.Services.Interfaces;
 using OrderFoodLibrary.Entities;
 
 namespace order_food_backend.Services
 {
-    public class DishService
+    public class DishService : IDishService
     {
 
         private readonly IDishRepository _dishRepository;

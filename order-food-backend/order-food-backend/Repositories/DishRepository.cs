@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using order_food_backend.Context;
+using order_food_backend.Repositories.Interfaces;
 using OrderFoodLibrary.Entities;
 
 namespace order_food_backend.Repositories
 {
-    public class DishRepository
+    public class DishRepository : IDishRepository
     {
         private readonly ApplicationDbContext _context;
 

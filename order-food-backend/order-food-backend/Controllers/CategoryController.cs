@@ -17,16 +17,9 @@ namespace order_food_backend.Controllers
             _categoryService = categoryService;
         }
 
-        // GET: api/<CategoryController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/<categoryController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<string>>> GetAsync()
+        public async Task<ActionResult<IEnumerable<string>>> Get()
         {
             var categories = await _categoryService.GetCategories();
 
@@ -40,7 +33,7 @@ namespace order_food_backend.Controllers
 
         // GET api/<categoryController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<string>> GetAsync(int id)
+        public async Task<ActionResult<string>> Get(int id)
         {
             if (id == 0)
             {
