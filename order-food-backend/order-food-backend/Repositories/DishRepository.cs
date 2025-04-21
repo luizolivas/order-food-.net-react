@@ -16,6 +16,7 @@ namespace order_food_backend.Repositories
 
         public async Task CreateDish(Dish dish)
         {
+            _context.Attach(dish.Category);
             await _context.Dishes.AddAsync(dish);
             await _context.SaveChangesAsync();
         }
@@ -25,7 +26,7 @@ namespace order_food_backend.Repositories
             var dish = await _context.Dishes.FindAsync(id);
             if (dish == null)
             {
-                throw new KeyNotFoundException("Categoria não encontrada");
+                throw new KeyNotFoundException("Prato não encontrada");
             }
 
             _context.Dishes.Remove(dish);
@@ -48,12 +49,27 @@ namespace order_food_backend.Repositories
 
             if (existingDish == null)
             {
-                throw new KeyNotFoundException("Categoria não encontrada");
+                throw new KeyNotFoundException("Prato não encontrada");
             }
 
             existingDish.Name = dish.Name;
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Dish> UpdateAviability(int id, bool avaliable)
+        {
+            var existingDish = await _context.Dishes.FindAsync(id);
+
+            if (existingDish == null)
+            {
+                throw new KeyNotFoundException("Prato não encontrada");
+            }
+
+            existingDish.Avaliable = avaliable;
+            await _context.SaveChangesAsync();
+
+            return existingDish;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using OrderFoodLibrary.Entities;
+﻿using OrderFoodLibrary.DTOs;
+using OrderFoodLibrary.Entities;
 
 namespace order_food_backend.Services.Interfaces
 {
@@ -8,6 +9,7 @@ namespace order_food_backend.Services.Interfaces
         Task<Dish> GetDishById(int id);
         Task UpdateDish(int id, Dish Dish);
         Task DeleteDish(int id);
-        Task AddDish(Dish Dish);
+        Task AddDish(DishDto Dish);
+        Task<Dish> UpdateAviability(int id, bool avaliable);
     }
 }

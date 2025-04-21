@@ -1,5 +1,6 @@
 ﻿using order_food_backend.Repositories.Interfaces;
 using order_food_backend.Services.Interfaces;
+using OrderFoodLibrary.DTOs;
 using OrderFoodLibrary.Entities;
 
 namespace order_food_backend.Services
@@ -8,14 +9,25 @@ namespace order_food_backend.Services
     {
 
         private readonly IDishRepository _dishRepository;
-
-        public DishService(IDishRepository dishRepository)
+        private readonly ICategoryService _categoryService;
+        public DishService(IDishRepository dishRepository, ICategoryService categoryService)
         {
             _dishRepository = dishRepository;
+            _categoryService = categoryService;
+
         }
 
-        public async Task AddDish(Dish dish)
+        public async Task AddDish(DishDto dto)
         {
+            var cat = await _categoryService.GetCategoryById(dto.CategoryId);
+
+            if(cat == null)
+            {
+                throw new KeyNotFoundException($"Nenhuma categoria encontrada para o ID {dto.CategoryId}.");
+            }
+
+            var dish = new Dish(dto.Name, dto.Description, dto.Price, dto.Avaliable, cat);
+
             await _dishRepository.CreateDish(dish);
         }
 
@@ -55,13 +67,21 @@ namespace order_food_backend.Services
 
         public async Task UpdateDish(int id, Dish dish)
         {
-            if (dish == null)
-                throw new ArgumentNullException(nameof(dish), "Prato não pode ser null");
-
             if (dish.Id != id)
                 throw new ArgumentException("O ID do prato informado não corresponde ao ID do objeto.");
 
             await _dishRepository.UpdateDish(dish);
+        }
+
+        public async Task<Dish> UpdateAviability(int id, bool avaliable)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "O ID deve ser maior que zero.");
+            }
+
+            var dishUpdated = await _dishRepository.UpdateAviability(id, avaliable);
+            return dishUpdated;
         }
     }
 }

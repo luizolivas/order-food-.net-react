@@ -14,9 +14,6 @@ namespace OrderFoodLibrary.Entities {
 
         public Category (string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("O nome da bebida é obrigatório.");
-
             Name = name;
         }
     }

@@ -9,7 +9,6 @@ namespace OrderFoodLibrary.Enums
     public enum StatusPedido
     {
         RECEBIDO,
-        EM_PEDIDO,
         EM_PREPARACO,
         PRONTO,
         ENTREGUE

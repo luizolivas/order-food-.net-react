@@ -9,5 +9,6 @@ namespace order_food_backend.Repositories.Interfaces
         Task DeleteDish(int id);
         Task UpdateDish(Dish dish);
         Task CreateDish(Dish dish);
+        Task<Dish> UpdateAviability(int id, bool avaliable);
     }
 }

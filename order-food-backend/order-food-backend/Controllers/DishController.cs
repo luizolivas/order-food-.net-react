@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using order_food_backend.Services.Interfaces;
+using OrderFoodLibrary.DTOs;
 using OrderFoodLibrary.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -52,7 +53,7 @@ namespace order_food_backend.Controllers
 
         // POST api/<DishController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Dish dish)
+        public async Task<ActionResult> Post([FromBody] DishDto dish)
         {
             if (dish == null)
             {
@@ -100,6 +101,18 @@ namespace order_food_backend.Controllers
 
             await _dishService.DeleteDish(id);
             return Ok($"Prato com ID {id} foi deletado com sucesso.");
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateAvailability(int id, bool avaliable)
+        {
+            if (id <= 0)
+            {
+                return BadRequest($"ID inválido. ID: {id}.");
+            }
+
+            var updatedDish = await _dishService.UpdateAviability(id, avaliable);
+            return Ok(updatedDish);
         }
     }
 }
